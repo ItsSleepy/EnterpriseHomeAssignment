@@ -1,0 +1,120 @@
+@page
+@model EnterpriseHomeAssignment.Pages.ApprovalModel
+@{
+    ViewData["Title"] = "Approval";
+}
+
+<div class="container mt-4">
+    <h1>Approval Dashboard</h1>
+
+    <form method="post">
+        @if (Model.PendingRestaurants.Any())
+        {
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Pending Restaurants (Site Admin Only)</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="selectAllRestaurants" />
+                                </th>
+                                <th>Name</th>
+                                <th>Owner Email</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.PendingRestaurants.Count; i++)
+                            {
+                                var restaurant = Model.PendingRestaurants[i];
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" 
+                                               name="SelectedRestaurantIds" 
+                                               value="@restaurant.Id" 
+                                               class="restaurant-checkbox" />
+                                    </td>
+                                    <td>@restaurant.Name</td>
+                                    <td>@restaurant.OwnerEmailAddress</td>
+                                    <td><span class="badge bg-warning">@restaurant.Status</span></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+
+        @if (Model.PendingMenuItems.Any())
+        {
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h3>Pending Menu Items (Restaurant Owner)</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <input type="checkbox" id="selectAllMenuItems" />
+                                </th>
+                                <th>Title</th>
+                                <th>Price</th>
+                                <th>Restaurant</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < Model.PendingMenuItems.Count; i++)
+                            {
+                                var menuItem = Model.PendingMenuItems[i];
+                                <tr>
+                                    <td>
+                                        <input type="checkbox" 
+                                               name="SelectedMenuItemIds" 
+                                               value="@menuItem.Id" 
+                                               class="menuitem-checkbox" />
+                                    </td>
+                                    <td>@menuItem.Title</td>
+                                    <td>@menuItem.Price.ToString("C")</td>
+                                    <td>@menuItem.Restaurant?.Name</td>
+                                    <td><span class="badge bg-warning">@menuItem.Status</span></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+
+        @if (!Model.PendingRestaurants.Any() && !Model.PendingMenuItems.Any())
+        {
+            <div class="alert alert-info">
+                No pending items to approve.
+            </div>
+        }
+        else
+        {
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary btn-lg">Approve Selected Items</button>
+            </div>
+        }
+    </form>
+</div>
+
+@section Scripts {
+    <script>
+        document.getElementById('selectAllRestaurants')?.addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.restaurant-checkbox');
+            checkboxes.forEach(cb => cb.checked = this.checked);
+        });
+
+        document.getElementById('selectAllMenuItems')?.addEventListener('change', function() {
+            const checkboxes = document.querySelectorAll('.menuitem-checkbox');
+            checkboxes.forEach(cb => cb.checked = this.checked);
+        });
+    </script>
+}

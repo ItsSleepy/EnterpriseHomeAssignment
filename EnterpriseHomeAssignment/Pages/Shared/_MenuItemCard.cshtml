@@ -1,0 +1,12 @@
+@model EnterpriseHomeAssignment.Models.MenuItem
+
+<div class="card h-100">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Title</h5>
+        <p class="card-text">
+            <strong>Price:</strong> @Model.Price.ToString("C")<br/>
+            <strong>Restaurant:</strong> @Model.Restaurant?.Name<br/>
+            <strong>Status:</strong> <span class="badge bg-success">@Model.Status</span>
+        </p>
+    </div>
+</div>

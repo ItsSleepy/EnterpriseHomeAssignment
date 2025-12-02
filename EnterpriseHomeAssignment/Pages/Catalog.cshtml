@@ -1,0 +1,74 @@
+@page
+@model EnterpriseHomeAssignment.Pages.CatalogModel
+@{
+    ViewData["Title"] = "Catalog";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Verified Catalog</h1>
+        <div class="btn-group" role="group">
+            <a asp-page="/Catalog" asp-route-viewMode="card" class="btn @(Model.ViewMode == "card" ? "btn-primary" : "btn-outline-primary")">
+                <i class="bi bi-card-heading"></i> Card View
+            </a>
+            <a asp-page="/Catalog" asp-route-viewMode="row" class="btn @(Model.ViewMode == "row" ? "btn-primary" : "btn-outline-primary")">
+                <i class="bi bi-list"></i> Row View
+            </a>
+        </div>
+    </div>
+
+    @if (Model.ViewMode == "card")
+    {
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            @foreach (var item in Model.Items)
+            {
+                <div class="col">
+                    @if (item is EnterpriseHomeAssignment.Models.Restaurant restaurant)
+                    {
+                        <partial name="@item.GetCardPartial()" model="restaurant" />
+                    }
+                    else if (item is EnterpriseHomeAssignment.Models.MenuItem menuItem)
+                    {
+                        <partial name="@item.GetCardPartial()" model="menuItem" />
+                    }
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Name/Title</th>
+                    <th>Details</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Items)
+                {
+                    @if (item is EnterpriseHomeAssignment.Models.Restaurant restaurant)
+                    {
+                        <tr>
+                            <td><span class="badge bg-info">Restaurant</span></td>
+                            <td>@restaurant.Name</td>
+                            <td>@restaurant.OwnerEmailAddress</td>
+                            <td><span class="badge bg-success">@restaurant.Status</span></td>
+                        </tr>
+                    }
+                    else if (item is EnterpriseHomeAssignment.Models.MenuItem menuItem)
+                    {
+                        <tr>
+                            <td><span class="badge bg-warning">Menu Item</span></td>
+                            <td>@menuItem.Title</td>
+                            <td>@menuItem.Price.ToString("C") - @menuItem.Restaurant?.Name</td>
+                            <td><span class="badge bg-success">@menuItem.Status</span></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    }
+</div>
