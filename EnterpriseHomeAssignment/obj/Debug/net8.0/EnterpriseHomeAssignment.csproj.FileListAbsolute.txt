@@ -151,3 +151,4 @@ C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\D
 C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\EnterpriseHomeAssignment.genruntimeconfig.cache
 C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\ref\EnterpriseHomeAssignment.dll
 C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\EnterpriseHomeAssignment.sourcelink.json

@@ -1,0 +1,132 @@
+@page
+@model EnterpriseHomeAssignment.Pages.BulkImportModel
+@{
+    ViewData["Title"] = "Bulk Import";
+}
+
+<div class="container mt-4">
+    <h1>Bulk Import Restaurant Data</h1>
+    <p class="text-muted">Upload a JSON file containing restaurants and menu items to import them into the system.</p>
+
+    @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Error!</strong> @Model.ErrorMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (!string.IsNullOrEmpty(Model.SuccessMessage))
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Success!</strong> @Model.SuccessMessage
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    }
+
+    @if (Model.PreviewItems != null && Model.PreviewItems.Any())
+    {
+        <div class="card mb-4">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">Data Preview</h4>
+                <small>Review the data before committing to database</small>
+            </div>
+            <div class="card-body">
+                <h5>Restaurants (@Model.PreviewItems.Count(i => i is EnterpriseHomeAssignment.Models.Restaurant))</h5>
+                <table class="table table-sm table-striped mb-4">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Owner Email</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.PreviewItems.OfType<EnterpriseHomeAssignment.Models.Restaurant>())
+                        {
+                            <tr>
+                                <td>@item.Name</td>
+                                <td>@item.OwnerEmailAddress</td>
+                                <td><span class="badge bg-warning">@item.Status</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <h5>Menu Items (@Model.PreviewItems.Count(i => i is EnterpriseHomeAssignment.Models.MenuItem))</h5>
+                <table class="table table-sm table-striped mb-4">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Price</th>
+                            <th>Restaurant ID</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.PreviewItems.OfType<EnterpriseHomeAssignment.Models.MenuItem>())
+                        {
+                            <tr>
+                                <td>@item.Title</td>
+                                <td>@item.Price.ToString("C")</td>
+                                <td>@item.RestaurantId</td>
+                                <td><span class="badge bg-warning">@item.Status</span></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <form method="post" asp-page-handler="Commit">
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg">
+                            <i class="bi bi-database"></i> Commit to Database
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    }
+
+    <div class="card">
+        <div class="card-header">
+            <h4 class="mb-0">Upload JSON File</h4>
+        </div>
+        <div class="card-body">
+            <form method="post" enctype="multipart/form-data" asp-page-handler="Upload">
+                <div class="mb-3">
+                    <label for="jsonFile" class="form-label">Select JSON File</label>
+                    <input type="file" class="form-control" id="jsonFile" name="jsonFile" accept=".json" required>
+                    <div class="form-text">Choose a JSON file containing restaurant and menu item data.</div>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                        <i class="bi bi-upload"></i> Upload and Preview
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5 class="mb-0">Expected JSON Format</h5>
+        </div>
+        <div class="card-body">
+            <pre><code>{
+  "Restaurants": [
+    {
+      "Name": "Pizza Palace",
+      "OwnerEmailAddress": "owner@pizza.com"
+    }
+  ],
+  "MenuItems": [
+    {
+      "Title": "Margherita Pizza",
+      "Price": 12.99,
+      "RestaurantId": 1
+    }
+  ]
+}</code></pre>
+        </div>
+    </div>
+</div>
