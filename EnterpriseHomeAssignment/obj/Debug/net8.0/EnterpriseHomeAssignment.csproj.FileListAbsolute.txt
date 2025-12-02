@@ -139,9 +139,7 @@ C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\D
 C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\rjimswa.dswa.cache.json
 C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
 C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
-C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\scopedcss\bundle\EnterpriseHomeAssignment.styles.css
-C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\scopedcss\projectbundle\EnterpriseHomeAssignment.bundle.scp.css
 C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\staticwebassets.build.json.cache
 C:\Users\isaac\Downloads\EnterpriseHomeAssignment\EnterpriseHomeAssignment\obj\Debug\net8.0\staticwebassets.development.json
