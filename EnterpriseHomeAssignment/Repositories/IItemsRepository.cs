@@ -6,5 +6,6 @@ namespace EnterpriseHomeAssignment.Repositories
     {
         Task<List<IItemValidating>> GetAllAsync();
         Task SaveAsync(List<IItemValidating> items);
+        Task ApproveAsync(List<int> itemIds);
     }
 }

@@ -31,7 +31,7 @@ namespace EnterpriseHomeAssignment.Pages
             var userEmail = User.Identity?.Name;
 
             // Site admin can approve restaurants
-            if (userEmail == "isaacclaudec@gmail.com")
+            if (userEmail == "siteadmin@example.com")
             {
                 PendingRestaurants = await _context.Restaurants
                     .Where(r => r.Status == "Pending")

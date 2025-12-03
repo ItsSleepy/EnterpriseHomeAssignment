@@ -42,5 +42,19 @@ namespace EnterpriseHomeAssignment.Repositories
 
             await _context.SaveChangesAsync();
         }
+
+        public async Task ApproveAsync(List<int> itemIds)
+        {
+            var restaurants = await _context.Restaurants
+                .Where(r => itemIds.Contains(r.Id))
+                .ToListAsync();
+
+            foreach (var restaurant in restaurants)
+            {
+                restaurant.Status = "Approved";
+            }
+
+            await _context.SaveChangesAsync();
+        }
     }
 }
