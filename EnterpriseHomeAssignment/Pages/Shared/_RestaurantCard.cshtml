@@ -1,6 +1,16 @@
 @model EnterpriseHomeAssignment.Models.Restaurant
 
 <div class="card h-100">
+    @if (!string.IsNullOrEmpty(Model.ImagePath))
+    {
+        <img src="@Model.ImagePath" class="card-img-top" alt="@Model.Name" style="height: 200px; object-fit: cover;">
+    }
+    else
+    {
+        <div class="card-img-top bg-secondary d-flex align-items-center justify-content-center" style="height: 200px;">
+            <i class="bi bi-building text-white" style="font-size: 4rem;"></i>
+        </div>
+    }
     <div class="card-body">
         <h5 class="card-title">@Model.Name</h5>
         <p class="card-text">

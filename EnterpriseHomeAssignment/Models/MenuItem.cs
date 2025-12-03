@@ -24,6 +24,8 @@ namespace EnterpriseHomeAssignment.Models
         [Required]
         public string Status { get; set; } = "Pending";
 
+        public string? ImagePath { get; set; }
+
         public List<string> GetValidatorEmails()
         {
             if (Restaurant != null)
