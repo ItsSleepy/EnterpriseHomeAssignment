@@ -17,5 +17,17 @@ namespace EnterpriseHomeAssignment.Repositories
             _items.AddRange(items);
             return Task.CompletedTask;
         }
+
+        public Task ApproveAsync(List<int> itemIds)
+        {
+            foreach (var item in _items)
+            {
+                if (item is Restaurant restaurant && itemIds.Contains(restaurant.Id))
+                {
+                    restaurant.Status = "Approved";
+                }
+            }
+            return Task.CompletedTask;
+        }
     }
 }
