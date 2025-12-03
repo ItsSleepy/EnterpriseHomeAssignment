@@ -22,18 +22,38 @@ namespace EnterpriseHomeAssignment.Pages
         {
             ViewMode = viewMode;
             
-            var restaurants = await _context.Restaurants
-                .Where(r => r.Status == "Approved")
-                .ToListAsync();
+            if (viewMode == "row")
+            {
+                // List view: Show approved restaurants with their related approved menu items
+                var restaurants = await _context.Restaurants
+                    .Where(r => r.Status == "Approved")
+                    .ToListAsync();
 
-            var menuItems = await _context.MenuItems
-                .Include(m => m.Restaurant)
-                .Where(m => m.Status == "Approved")
-                .ToListAsync();
+                Items = new List<IItemValidating>();
+                
+                foreach (var restaurant in restaurants)
+                {
+                    Items.Add(restaurant);
+                    
+                    // Add approved menu items for this restaurant
+                    var menuItems = await _context.MenuItems
+                        .Include(m => m.Restaurant)
+                        .Where(m => m.RestaurantId == restaurant.Id && m.Status == "Approved")
+                        .ToListAsync();
+                    
+                    Items.AddRange(menuItems);
+                }
+            }
+            else
+            {
+                // Card view: Show only approved restaurants
+                var restaurants = await _context.Restaurants
+                    .Where(r => r.Status == "Approved")
+                    .ToListAsync();
 
-            Items = new List<IItemValidating>();
-            Items.AddRange(restaurants);
-            Items.AddRange(menuItems);
+                Items = new List<IItemValidating>();
+                Items.AddRange(restaurants);
+            }
         }
     }
 }
