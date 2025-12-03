@@ -1,0 +1,62 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Restaurant Management System</h1>
+    <p class="lead">Manage restaurants and menu items with ease</p>
+    
+    <div class="row mt-5">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-upload"></i> Bulk Import
+                    </h5>
+                    <p class="card-text">Upload JSON files and manage restaurant data</p>
+                    <a asp-page="/BulkImport" class="btn btn-primary">Go to Bulk Import</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-check-circle"></i> Approval
+                    </h5>
+                    <p class="card-text">Approve pending restaurants and menu items</p>
+                    <a asp-page="/Approval" class="btn btn-success">Go to Approval</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-grid"></i> Catalog
+                    </h5>
+                    <p class="card-text">View approved restaurants and menu items</p>
+                    <a asp-page="/Catalog" class="btn btn-info">Go to Catalog</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <div class="alert alert-success mt-4">
+            Welcome, @User.Identity.Name!
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info mt-4">
+            <a asp-area="Identity" asp-page="/Account/Login" class="alert-link">Login</a> or 
+            <a asp-area="Identity" asp-page="/Account/Register" class="alert-link">Register</a> to get started
+        </div>
+    }
+</div>
