@@ -23,7 +23,7 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => {
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
 // Register repositories as keyed services
-builder.Services.AddKeyedScoped<IItemsRepository, ItemsInMemoryRepository>("memory");
+builder.Services.AddKeyedSingleton<IItemsRepository, ItemsInMemoryRepository>("memory");
 builder.Services.AddKeyedScoped<IItemsRepository, ItemsDbRepository>("database");
 
 // Register factory
