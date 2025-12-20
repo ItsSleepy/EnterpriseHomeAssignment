@@ -105,16 +105,21 @@ namespace EnterpriseHomeAssignment.Pages
                 using var memoryStream = new MemoryStream();
                 using (var archive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                 {
+                    int restaurantIndex = 0;
+                    int menuItemIndex = 0;
+                    
                     foreach (var item in items)
                     {
                         string folderName = "";
                         if (item is Restaurant restaurant)
                         {
-                            folderName = $"restaurant-{restaurant.Id}";
+                            folderName = $"restaurant-{restaurantIndex}";
+                            restaurantIndex++;
                         }
                         else if (item is MenuItem menuItem)
                         {
-                            folderName = $"menuitem-{menuItem.Id}";
+                            folderName = $"menuitem-{menuItemIndex}";
+                            menuItemIndex++;
                         }
 
                         // Create folder with default.jpg
@@ -177,20 +182,22 @@ namespace EnterpriseHomeAssignment.Pages
                 var uploadsPath = Path.Combine(_environment.WebRootPath, "uploads");
                 Directory.CreateDirectory(uploadsPath);
 
+                int restaurantIndex = 0;
+                int menuItemIndex = 0;
+                
                 foreach (var item in items)
                 {
                     string folderName = "";
-                    string itemId = "";
                     
                     if (item is Restaurant restaurant)
                     {
-                        folderName = $"restaurant-{restaurant.Id}";
-                        itemId = restaurant.Id.ToString();
+                        folderName = $"restaurant-{restaurantIndex}";
+                        restaurantIndex++;
                     }
                     else if (item is MenuItem menuItem)
                     {
-                        folderName = $"menuitem-{menuItem.Id}";
-                        itemId = menuItem.Id.ToString();
+                        folderName = $"menuitem-{menuItemIndex}";
+                        menuItemIndex++;
                     }
 
                     var sourceFolderPath = Path.Combine(tempPath, folderName);

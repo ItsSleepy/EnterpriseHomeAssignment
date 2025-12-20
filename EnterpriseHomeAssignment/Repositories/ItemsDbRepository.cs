@@ -28,19 +28,37 @@ namespace EnterpriseHomeAssignment.Repositories
 
         public async Task SaveAsync(List<IItemValidating> items)
         {
-            foreach (var item in items)
+            // First, save restaurants to get their auto-generated IDs
+            var restaurants = items.OfType<Restaurant>().ToList();
+            foreach (var restaurant in restaurants)
             {
-                if (item is Restaurant restaurant)
-                {
-                    _context.Restaurants.Add(restaurant);
-                }
-                else if (item is MenuItem menuItem)
-                {
-                    _context.MenuItems.Add(menuItem);
-                }
+                // Reset ID to 0 so Entity Framework treats it as a new entity
+                restaurant.Id = 0;
+                _context.Restaurants.Add(restaurant);
+            }
+            
+            // Save restaurants first to generate IDs
+            if (restaurants.Any())
+            {
+                await _context.SaveChangesAsync();
             }
 
-            await _context.SaveChangesAsync();
+            // Now save menu items - they should already have Restaurant references set
+            var menuItems = items.OfType<MenuItem>().ToList();
+            foreach (var menuItem in menuItems)
+            {
+                // If the menuItem has a Restaurant reference, use its ID
+                if (menuItem.Restaurant != null)
+                {
+                    menuItem.RestaurantId = menuItem.Restaurant.Id;
+                }
+                _context.MenuItems.Add(menuItem);
+            }
+
+            if (menuItems.Any())
+            {
+                await _context.SaveChangesAsync();
+            }
         }
 
         public async Task ApproveAsync(List<int> itemIds)

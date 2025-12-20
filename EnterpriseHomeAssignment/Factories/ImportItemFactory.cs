@@ -46,7 +46,7 @@ namespace EnterpriseHomeAssignment.Factories
                             };
                             items.Add(restaurant);
 
-                            // Map string ID to the Restaurant object (ID will be auto-generated after save)
+                            // Map string ID to the Restaurant object
                             if (element.TryGetProperty("id", out var idProperty))
                             {
                                 var stringId = idProperty.GetString();
@@ -75,15 +75,14 @@ namespace EnterpriseHomeAssignment.Factories
                                 Status = "Pending"
                             };
 
-                            // Link to restaurant by reference (for in-memory, will be resolved after DB save)
+                            // Link to restaurant by reference
                             if (element.TryGetProperty("restaurantId", out var restaurantIdProperty))
                             {
                                 var restaurantStringId = restaurantIdProperty.GetString();
                                 if (!string.IsNullOrEmpty(restaurantStringId) && restaurantIdMap.TryGetValue(restaurantStringId, out var restaurant))
                                 {
-                                    // Store the restaurant reference temporarily
+                                    // Set the Restaurant reference - RestaurantId will be set when saving to DB
                                     menuItem.Restaurant = restaurant;
-                                    // RestaurantId will be set after commit when Restaurant gets its DB ID
                                 }
                             }
 
