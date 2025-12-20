@@ -32,6 +32,8 @@ namespace EnterpriseHomeAssignment.Repositories
             var restaurants = items.OfType<Restaurant>().ToList();
             foreach (var restaurant in restaurants)
             {
+                // Reset ID to 0 so Entity Framework treats it as a new entity
+                restaurant.Id = 0;
                 _context.Restaurants.Add(restaurant);
             }
             
