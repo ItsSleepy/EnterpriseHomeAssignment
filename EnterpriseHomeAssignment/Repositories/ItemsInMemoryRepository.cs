@@ -14,6 +14,26 @@ namespace EnterpriseHomeAssignment.Repositories
         public Task SaveAsync(List<IItemValidating> items)
         {
             _items.Clear();
+            
+            // Assign temporary IDs for preview
+            int restaurantIdCounter = 1;
+            foreach (var item in items)
+            {
+                if (item is Restaurant restaurant)
+                {
+                    restaurant.Id = restaurantIdCounter++;
+                }
+            }
+            
+            // Update menu items with restaurant IDs from references
+            foreach (var item in items)
+            {
+                if (item is MenuItem menuItem && menuItem.Restaurant != null)
+                {
+                    menuItem.RestaurantId = menuItem.Restaurant.Id;
+                }
+            }
+            
             _items.AddRange(items);
             return Task.CompletedTask;
         }
