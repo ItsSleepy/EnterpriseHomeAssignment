@@ -30,24 +30,31 @@ namespace EnterpriseHomeAssignment.Pages
         {
             var userEmail = User.Identity?.Name;
 
-            // Site admin can approve restaurants
+            // Site admin can approve both restaurants and all menu items
             if (userEmail == "siteadmin@example.com")
             {
                 PendingRestaurants = await _context.Restaurants
                     .Where(r => r.Status == "Pending")
                     .ToListAsync();
+                    
+                PendingMenuItems = await _context.MenuItems
+                    .Include(m => m.Restaurant)
+                    .Where(m => m.Status == "Pending")
+                    .ToListAsync();
             }
+            else
+            {
+                // Restaurant owners can approve menu items for their restaurants only
+                var ownedRestaurants = await _context.Restaurants
+                    .Where(r => r.OwnerEmailAddress == userEmail)
+                    .Select(r => r.Id)
+                    .ToListAsync();
 
-            // Restaurant owners can approve menu items for their restaurants
-            var ownedRestaurants = await _context.Restaurants
-                .Where(r => r.OwnerEmailAddress == userEmail)
-                .Select(r => r.Id)
-                .ToListAsync();
-
-            PendingMenuItems = await _context.MenuItems
-                .Include(m => m.Restaurant)
-                .Where(m => m.Status == "Pending" && ownedRestaurants.Contains(m.RestaurantId))
-                .ToListAsync();
+                PendingMenuItems = await _context.MenuItems
+                    .Include(m => m.Restaurant)
+                    .Where(m => m.Status == "Pending" && ownedRestaurants.Contains(m.RestaurantId))
+                    .ToListAsync();
+            }
         }
 
         public async Task<IActionResult> OnPostAsync()
