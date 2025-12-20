@@ -1,0 +1,104 @@
+[
+  {
+    "type": "restaurant",
+    "id": "R-2001",
+    "name": "The Golden Dragon",
+    "ownerEmailAddress": "dragon.owner@example.com"
+  },
+  {
+    "type": "restaurant",
+    "id": "R-2002",
+    "name": "Mama's Kitchen",
+    "ownerEmailAddress": "mama.owner@example.com"
+  },
+  {
+    "type": "restaurant",
+    "id": "R-2003",
+    "name": "Ocean Fresh Seafood",
+    "ownerEmailAddress": "ocean.owner@example.com"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3001",
+    "title": "Kung Pao Chicken",
+    "price": 13.99,
+    "restaurantId": "R-2001"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3002",
+    "title": "Sweet and Sour Pork",
+    "price": 12.50,
+    "restaurantId": "R-2001"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3003",
+    "title": "Fried Rice Special",
+    "price": 9.99,
+    "restaurantId": "R-2001"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3004",
+    "title": "Spring Rolls (6 pcs)",
+    "price": 6.50,
+    "restaurantId": "R-2001"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3005",
+    "title": "Homemade Lasagna",
+    "price": 15.99,
+    "restaurantId": "R-2002"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3006",
+    "title": "Chicken Parmesan",
+    "price": 16.50,
+    "restaurantId": "R-2002"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3007",
+    "title": "Caesar Salad",
+    "price": 8.99,
+    "restaurantId": "R-2002"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3008",
+    "title": "Tiramisu",
+    "price": 7.50,
+    "restaurantId": "R-2002"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3009",
+    "title": "Grilled Salmon",
+    "price": 22.99,
+    "restaurantId": "R-2003"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3010",
+    "title": "Fish and Chips",
+    "price": 14.99,
+    "restaurantId": "R-2003"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3011",
+    "title": "Seafood Platter",
+    "price": 29.99,
+    "restaurantId": "R-2003"
+  },
+  {
+    "type": "menuitem",
+    "id": "M-3012",
+    "title": "Lobster Bisque",
+    "price": 11.50,
+    "restaurantId": "R-2003"
+  }
+]
